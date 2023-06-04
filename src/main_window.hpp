@@ -10,6 +10,8 @@ QT_END_NAMESPACE
 
 class GeoLocationProvider;
 class WeatherProvider;
+class LocationWidget;
+class ForecastWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -32,6 +34,8 @@ private:
     Ui::MainWindow *ui;
     GeoLocationProvider *m_geo_location_provider = nullptr;
     WeatherProvider *m_weather_provider = nullptr;
+    ForecastWidget *m_forecast_widget = nullptr;
+    LocationWidget *m_location_widget = nullptr;
 };
 
 #endif // MAIN_WINDOW_HPP

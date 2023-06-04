@@ -7,7 +7,7 @@
 #include <QJsonParseError>
 
 GeoLocationProvider::GeoLocationProvider(QObject *parent)
-    : QObject{parent}
+    : QObject(parent)
 {
     m_network_manager = new QNetworkAccessManager(this);
     connect(m_network_manager, SIGNAL(finished(QNetworkReply*)),

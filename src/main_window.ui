@@ -6,87 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>341</width>
-    <height>289</height>
+    <width>640</width>
+    <height>499</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Weather</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QGroupBox" name="boxGeoLocation">
-      <property name="title">
-       <string>Geo Location</string>
-      </property>
-      <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="0">
-        <widget class="QLabel" name="lblCity">
-         <property name="text">
-          <string>City:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="editCity"/>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="boxForecast">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="title">
-       <string>Forecast</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QLabel" name="lblCityName"/>
-       </item>
-       <item>
-        <widget class="QLabel" name="lblTemperature">
-         <property name="text">
-          <string>Temperature:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="lblWeatherCode">
-         <property name="text">
-          <string>Weather code:</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btnGetForecast">
-      <property name="text">
-       <string>Get forecast</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>341</width>
-     <height>22</height>
-    </rect>
-   </property>
+  <property name="windowIcon">
+   <iconset resource="weather.qrc">
+    <normaloff>:/assets/solar-eclipse.svg</normaloff>:/assets/solar-eclipse.svg</iconset>
+  </property>
+  <widget class="QWidget" name="mainWidget">
+   <layout class="QVBoxLayout" name="verticalLayout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="weather.qrc"/>
+ </resources>
  <connections/>
 </ui>

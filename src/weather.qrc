@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/solar-eclipse.svg</file>
+    </qresource>
+</RCC>

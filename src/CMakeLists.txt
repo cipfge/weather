@@ -15,14 +15,23 @@ endif()
 
 set(PROJECT_SOURCES
     "main.cpp"
+    "animated_svg_widget.cpp"
+    "animated_svg_widget.hpp"
+    "forecast_widget.cpp"
+    "forecast_widget.hpp"
+    "forecast_widget.ui"
     "geo_location_provider.cpp"
     "geo_location_provider.hpp"
+    "location_widget.cpp"
+    "location_widget.hpp"
+    "location_widget.ui"
     "main_window.cpp"
     "main_window.hpp"
     "main_window.ui"
     "weather_provider.cpp"
     "weather_provider.hpp"
     "weather_types.hpp"
+    "weather.qrc"
     )
 
 qt_add_executable(weather MANUAL_FINALIZATION ${PROJECT_SOURCES})
