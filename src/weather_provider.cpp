@@ -21,8 +21,8 @@ WeatherProvider::~WeatherProvider()
 
 void WeatherProvider::get_weather_forecast()
 {
-    QString service_url = "https://api.open-meteo.com/v1/forecast?latitude=" + QString::number(m_latitude) +
-                          "&longitude=" + QString::number(m_longitude) +
+    QString service_url = "https://api.open-meteo.com/v1/forecast?latitude=" + QString::number(m_geo_location.latitude) +
+                          "&longitude=" + QString::number(m_geo_location.longitude) +
                           "&current_weather=true";
 
     QNetworkRequest request(service_url);
@@ -33,49 +33,38 @@ void WeatherProvider::network_manager_finished(QNetworkReply *reply)
 {
     if (reply->error())
     {
-        network_error(reply->errorString());
+        emit network_error(reply->errorString());
         return;
     }
 
-    QString data = reply->readAll();
-    decode_forecast_data(data);
+    decode_forecast(reply->readAll());
 }
 
-void WeatherProvider::set_latitude(double value)
+void WeatherProvider::set_geo_location(const GeoLocation &geo_location)
 {
-    m_latitude = value;
+    m_geo_location = geo_location;
 }
 
-double WeatherProvider::get_latitude() const
+const GeoLocation &WeatherProvider::get_geo_location() const
 {
-    return m_latitude;
+    return m_geo_location;
 }
 
-void WeatherProvider::set_longitude(double value)
-{
-    m_longitude = value;
-}
-
-double WeatherProvider::get_longitude() const
-{
-    return m_longitude;
-}
-
-void WeatherProvider::decode_forecast_data(const QString &data)
+void WeatherProvider::decode_forecast(const QString &data)
 {
     QJsonParseError jerror {};
     QJsonDocument json_doc = QJsonDocument::fromJson(data.toUtf8(), &jerror);
 
     if (jerror.error != 0)
     {
-        emit decode_error(jerror.errorString());
+        emit weather_forecast_error(jerror.errorString());
         return;
     }
 
     QJsonObject json_root = json_doc.object();
     if (!json_root.contains("current_weather"))
     {
-        emit decode_error("Weather service reply doesn't contain current weather forecast data.");
+        emit weather_forecast_error("Weather service reply doesn't contain current weather forecast data.");
         return;
     }
 
@@ -100,5 +89,5 @@ void WeatherProvider::decode_forecast_data(const QString &data)
     if (json_forecast.contains("time"))
         forecast.time = json_forecast.value("time").toString();
 
-    emit weather_forecast(forecast);
+    emit weather_forecast_received(forecast);
 }

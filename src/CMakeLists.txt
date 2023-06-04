@@ -11,11 +11,14 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
 
 set(PROJECT_SOURCES
     "main.cpp"
+    "geo_location_provider.cpp"
+    "geo_location_provider.hpp"
     "main_window.cpp"
     "main_window.hpp"
     "main_window.ui"
     "weather_provider.cpp"
     "weather_provider.hpp"
+    "weather_types.hpp"
     )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

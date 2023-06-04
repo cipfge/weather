@@ -1,14 +1,15 @@
 #ifndef MAIN_WINDOW_HPP
 #define MAIN_WINDOW_HPP
 
+#include "weather_types.hpp"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+class GeoLocationProvider;
 class WeatherProvider;
-struct WeatherForecast;
 
 class MainWindow : public QMainWindow
 {
@@ -22,13 +23,14 @@ protected:
     void showEvent(QShowEvent *event);
 
 private slots:
-    void network_error(const QString &error_str);
-    void decode_error(const QString &error_str);
-    void weather_forecast(const WeatherForecast &forecast);
-    void get_forecast();
+    void show_error(const QString &error_str);
+    void geo_location_received(const GeoLocation &geo_location);
+    void weather_forecast_received(const WeatherForecast &forecast);
+    void button_get_forecast();
 
 private:
     Ui::MainWindow *ui;
+    GeoLocationProvider *m_geo_location_provider = nullptr;
     WeatherProvider *m_weather_provider = nullptr;
 };
 
