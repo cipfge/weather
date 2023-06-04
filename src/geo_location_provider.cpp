@@ -55,18 +55,18 @@ void GeoLocationProvider::decode_geo_location(const QString &data)
         return;
     }
 
+    // Just first object
+    QJsonObject json_obj = json_doc.array().first().toObject();
+
     GeoLocation geo_location {};
-    QJsonArray json_array = json_doc.array();
-    foreach (const QJsonValue &value, json_array)
-    {
-        QJsonObject json_obj = value.toObject();
-        if (json_obj.contains("lat"))
-            geo_location.latitude = json_obj.value("lat").toDouble();
-        if (json_obj.contains("lon"))
-            geo_location.longitude = json_obj.value("lon").toDouble();
-        if (json_obj.contains("display_name"))
-            geo_location.display_name = json_obj.value("display_name").toString();
-    }
+    if (json_obj.contains("display_name"))
+        geo_location.display_name = json_obj.value("display_name").toString();
+
+    if (json_obj.contains("lat"))
+        geo_location.latitude = json_obj.value("lat").toVariant().toDouble();
+
+    if (json_obj.contains("lon"))
+        geo_location.longitude = json_obj.value("lon").toVariant().toDouble();
 
     emit geo_location_received(geo_location);
 }

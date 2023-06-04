@@ -6,8 +6,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets SvgWidgets Network)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets SvgWidgets Network)
+
+if(${QT_VERSION_MAJOR} LESS 6)
+    message(FATAL_ERROR "This project requires Qt6.")
+endif()
 
 set(PROJECT_SOURCES
     "main.cpp"
@@ -21,15 +25,12 @@ set(PROJECT_SOURCES
     "weather_types.hpp"
     )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(weather MANUAL_FINALIZATION ${PROJECT_SOURCES})
-else()
-    add_executable(weather ${PROJECT_SOURCES})
-endif()
+qt_add_executable(weather MANUAL_FINALIZATION ${PROJECT_SOURCES})
 
 target_link_libraries(weather
     PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
+        Qt${QT_VERSION_MAJOR}::SvgWidgets
         Qt${QT_VERSION_MAJOR}::Network
     )
 
