@@ -15,7 +15,7 @@ public:
     explicit GeoLocationProvider(QObject *parent = nullptr);
     ~GeoLocationProvider();
 
-    void get_geo_location(const QString &city);
+    void get_geo_location(const QString &location);
 
 signals:
     void network_error(const QString &error_str);

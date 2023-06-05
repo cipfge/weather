@@ -19,9 +19,9 @@ GeoLocationProvider::~GeoLocationProvider()
     delete m_network_manager;
 }
 
-void GeoLocationProvider::get_geo_location(const QString &city)
+void GeoLocationProvider::get_geo_location(const QString &location)
 {
-    QString service_url = "https://nominatim.openstreetmap.org/search?city=" + city + "&format=json";
+    QString service_url = "https://nominatim.openstreetmap.org/search?city=" + location + "&format=json";
 
     QNetworkRequest request(service_url);
     m_network_manager->get(request);

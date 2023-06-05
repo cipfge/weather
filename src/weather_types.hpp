@@ -10,8 +10,9 @@ struct GeoLocation
     double longitude = 0.0;
 };
 
-struct WeatherForecast
+struct Forecast
 {
+    GeoLocation geo_location;
     double temperature = 0.0;
     double wind_speed = 0.0;
     int wind_direction = 0;

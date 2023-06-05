@@ -68,7 +68,9 @@ void WeatherProvider::decode_forecast(const QString &data)
         return;
     }
 
-    WeatherForecast forecast {};
+    Forecast forecast {};
+    forecast.geo_location = m_geo_location;
+
     QJsonObject json_forecast = json_root.value("current_weather").toObject();
 
     if (json_forecast.contains("temperature"))
@@ -84,7 +86,7 @@ void WeatherProvider::decode_forecast(const QString &data)
         forecast.weather_code = json_forecast.value("weathercode").toInt();
 
     if (json_forecast.contains("is_day"))
-        forecast.is_day = json_forecast.value("is_day").toBool();
+        forecast.is_day = json_forecast.value("is_day").toVariant().toBool();
 
     if (json_forecast.contains("time"))
         forecast.time = json_forecast.value("time").toString();

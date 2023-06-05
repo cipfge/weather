@@ -23,7 +23,7 @@ public:
 signals:
     void network_error(const QString &error_str);
     void weather_forecast_error(const QString &error_str);
-    void weather_forecast_received(const WeatherForecast &forecast);
+    void weather_forecast_received(const Forecast &forecast);
 
 private slots:
     void network_manager_finished(QNetworkReply *reply);
