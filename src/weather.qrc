@@ -20,19 +20,6 @@
         <file>assets/sleet.svg</file>
         <file>assets/snow.svg</file>
         <file>assets/thunderstorms-rain.svg</file>
-        <file>assets/wind-beaufort-0.svg</file>
-        <file>assets/wind-beaufort-1.svg</file>
-        <file>assets/wind-beaufort-2.svg</file>
-        <file>assets/wind-beaufort-3.svg</file>
-        <file>assets/wind-beaufort-4.svg</file>
-        <file>assets/wind-beaufort-5.svg</file>
-        <file>assets/wind-beaufort-6.svg</file>
-        <file>assets/wind-beaufort-7.svg</file>
-        <file>assets/wind-beaufort-8.svg</file>
-        <file>assets/wind-beaufort-9.svg</file>
-        <file>assets/wind-beaufort-10.svg</file>
-        <file>assets/wind-beaufort-11.svg</file>
-        <file>assets/wind-beaufort-12.svg</file>
         <file>assets/wind.svg</file>
         <file>assets/compass.svg</file>
     </qresource>
