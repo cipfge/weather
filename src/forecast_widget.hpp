@@ -3,6 +3,9 @@
 
 #include "weather_types.hpp"
 #include <QWidget>
+#include <QMap>
+#include <QPair>
+#include <QString>
 
 namespace Ui {
 class ForecastWidget;
@@ -25,6 +28,7 @@ private:
     Ui::ForecastWidget *ui;
     AnimatedSvgWidget *m_svg_widget;
     Forecast m_forecast;
+    static QMap<int, QPair<QString, QString>> m_weather_icons;
 
     void update_svg_icon();
 };

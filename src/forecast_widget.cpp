@@ -2,6 +2,38 @@
 #include "ui_forecast_widget.h"
 #include "animated_svg_widget.hpp"
 
+// Weather code, day icon, night icon
+QMap<int, QPair<QString, QString>> ForecastWidget::m_weather_icons = {
+    {  0, { ":/assets/clear-day.svg",                 ":/assets/clear-night.svg"                 } },
+    {  1, { ":/assets/partly-cloudy-day.svg",         ":/assets/clear-night.svg"                 } },
+    {  2, { ":/assets/partly-cloudy-day.svg",         ":/assets/clear-night.svg"                 } },
+    {  3, { ":/assets/overcast-day.svg",              ":/assets/overcast-night.svg"              } },
+    { 45, { ":/assets/fog-day.svg",                   ":/assets/fog-night.svg"                   } },
+    { 48, { ":/assets/fog-day.svg",                   ":/assets/fog-night.svg"                   } },
+    { 51, { ":/assets/partly-cloudy-day-drizzle.svg", ":/assets/partly-cloudy-night-drizzle.svg" } },
+    { 52, { ":/assets/partly-cloudy-day-drizzle.svg", ":/assets/partly-cloudy-night-drizzle.svg" } },
+    { 53, { ":/assets/partly-cloudy-day-drizzle.svg", ":/assets/partly-cloudy-night-drizzle.svg" } },
+    { 56, { ":/assets/partly-cloudy-day-sleet.svg",   ":/assets/partly-cloudy-night-sleet.svg"   } },
+    { 57, { ":/assets/partly-cloudy-day-sleet.svg",   ":/assets/partly-cloudy-night-sleet.svg"   } },
+    { 61, { ":/assets/partly-cloudy-day-rain.svg",    ":/assets/partly-cloudy-night-rain.svg"    } },
+    { 63, { ":/assets/rain.svg",                      ":/assets/rain.svg"                        } },
+    { 65, { ":/assets/rain.svg",                      ":/assets/rain.svg"                        } },
+    { 66, { ":/assets/sleet.svg",                     ":/assets/sleet.svg"                       } },
+    { 67, { ":/assets/sleet.svg",                     ":/assets/sleet.svg"                       } },
+    { 71, { ":/assets/snow.svg",                      ":/assets/snow.svg"                        } },
+    { 73, { ":/assets/snow.svg",                      ":/assets/snow.svg"                        } },
+    { 75, { ":/assets/snow.svg",                      ":/assets/snow.svg"                        } },
+    { 77, { ":/assets/snow.svg",                      ":/assets/snow.svg"                        } },
+    { 80, { ":/assets/rain.svg",                      ":/assets/rain.svg"                        } },
+    { 81, { ":/assets/rain.svg",                      ":/assets/rain.svg"                        } },
+    { 82, { ":/assets/rain.svg",                      ":/assets/rain.svg"                        } },
+    { 85, { ":/assets/snow.svg",                      ":/assets/snow.svg"                        } },
+    { 86, { ":/assets/snow.svg",                      ":/assets/snow.svg"                        } },
+    { 95, { ":/assets/thunderstorms-rain.svg",        ":/assets/thunderstorms-rain.svg"          } },
+    { 96, { ":/assets/thunderstorms-rain.svg",        ":/assets/thunderstorms-rain.svg"          } },
+    { 99, { ":/assets/thunderstorms-rain.svg",        ":/assets/thunderstorms-rain.svg"          } },
+};
+
 ForecastWidget::ForecastWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ForecastWidget)
@@ -31,99 +63,15 @@ void ForecastWidget::update()
 
 void ForecastWidget::update_svg_icon()
 {
-    switch (m_forecast.weather_code)
+    const auto &icon = m_weather_icons.find(m_forecast.weather_code) ;
+    if (icon == m_weather_icons.end())
     {
-    case 0:
-        if (!m_forecast.is_day)
-            m_svg_widget->load(":/assets/clear-night.svg");
-        else
-            m_svg_widget->load(":/assets/clear-day.svg");
-        break;
-
-    case 1:
-    case 2:
-        if (!m_forecast.is_day)
-            m_svg_widget->load(":/assets/clear-night.svg");
-        else
-            m_svg_widget->load(":/assets/partly-cloudy-day.svg");
-        break;
-        break;
-
-    case 3:
-        if (!m_forecast.is_day)
-            m_svg_widget->load(":/assets/overcast-night.svg");
-        else
-            m_svg_widget->load(":/assets/overcast-day.svg");
-        break;
-
-    case 45:
-    case 48:
-        if (!m_forecast.is_day)
-            m_svg_widget->load(":/assets/fog-night.svg");
-        else
-            m_svg_widget->load(":/assets/fog-day.svg");
-        break;
-
-    case 51:
-    case 53:
-    case 55:
-        if (!m_forecast.is_day)
-            m_svg_widget->load(":/assets/partly-cloudy-night-drizzle.svg");
-        else
-            m_svg_widget->load(":/assets/partly-cloudy-day-drizzle.svg");
-        break;
-
-    case 56:
-    case 57:
-        if (!m_forecast.is_day)
-            m_svg_widget->load(":/assets/partly-cloudy-night-sleet.svg");
-        else
-            m_svg_widget->load(":/assets/partly-cloudy-day-sleet.svg");
-        break;
-
-    case 61:
-        if (!m_forecast.is_day)
-            m_svg_widget->load(":/assets/partly-cloudy-night-rain.svg");
-        else
-            m_svg_widget->load(":/assets/partly-cloudy-day-rain.svg");
-        break;
-
-    case 63:
-    case 65:
-        m_svg_widget->load(":/assets/rain.svg");
-        break;
-
-    case 66:
-    case 67:
-        m_svg_widget->load(":/assets/sleet.svg");
-        break;
-
-    case 71:
-    case 73:
-    case 75:
-    case 77:
-        m_svg_widget->load(":/assets/snow.svg");
-        break;
-
-    case 80:
-    case 81:
-    case 82:
-        m_svg_widget->load(":/assets/rain.svg");
-        break;
-
-    case 85:
-    case 86:
-        m_svg_widget->load(":/assets/snow.svg");
-        break;
-
-    case 95:
-    case 96:
-    case 99:
-        m_svg_widget->load(":/assets/thunderstorms-rain.svg");
-        break;
-
-    default:
         m_svg_widget->load(":/assets/not-available.svg");
-        break;
+        return;
     }
+
+    if (m_forecast.is_day)
+        m_svg_widget->load(icon->first);
+    else
+        m_svg_widget->load(icon->second);
 }
