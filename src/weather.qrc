@@ -22,5 +22,6 @@
         <file>assets/thunderstorms-rain.svg</file>
         <file>assets/wind.svg</file>
         <file>assets/compass.svg</file>
+        <file>assets/view-refresh.svg</file>
     </qresource>
 </RCC>

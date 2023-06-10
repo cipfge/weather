@@ -33,6 +33,7 @@ private slots:
     void geo_location_received(const GeoLocation &geo_location);
     void weather_forecast_received(const Forecast &forecast);
     void change_location();
+    void request_forecast();
 
 private:
     Ui::MainWindow *ui;

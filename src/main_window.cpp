@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->setCurrentIndex(LOCATION_WIDGET_INDEX);
 
     connect(ui->btnChangeLocation, SIGNAL(clicked()), this, SLOT(change_location()));
+    connect(ui->btnRefresh, SIGNAL(clicked()), this, SLOT(request_forecast()));
     connect(m_location_widget, SIGNAL(location_selected(const QString&)), this, SLOT(location_selected(const QString&)));
     ui->locTitleFrame->hide();
 }
@@ -75,4 +76,9 @@ void MainWindow::change_location()
 {
     ui->stackedWidget->setCurrentIndex(LOCATION_WIDGET_INDEX);
     ui->locTitleFrame->hide();
+}
+
+void MainWindow::request_forecast()
+{
+    m_weather_provider->get_weather_forecast();
 }
