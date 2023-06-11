@@ -12,7 +12,7 @@ sudo apt install build-essential cmake ninja-build qt6-base-dev qt6-svg-dev
 
 Clone repository and build
 ```bash
-git clone [repo_url]
+git clone https://github.com/cipfge/weather
 cd weather
 mkdir build
 cd build
